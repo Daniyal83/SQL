@@ -21,3 +21,14 @@ ORDER BY OD.OrderID DESC
 -- Create a query to return all customers from USA without Fax:
 --| CustomerId | CompanyName |
 SELECT C.CustomerID, C.CompanyName FROM Customers C WHERE C.Country='USA' AND C.Fax IS NOT NULL
+
+--Fourth task
+-- Create a query to return:
+-- | Customer Id | Total number of Orders | % of all orders |
+--SELECT O.CustomerID, COUNT(O.OrderID) AS [Total Number Of Orders], AS [% Of All Orders] FROM Orders O
+-- SELECT COUNT(Orders.OrderID) FROM Orders == SELECT COUNT(*) FROM Orders
+SELECT C.CustomerID, COUNT(O.OrderID) AS [Total Number Of Orders],  CAST ((COUNT(O.OrderId)*100) AS FLOAT)/(SELECT COUNT(*) FROM Orders) AS PercentOfAllOrders FROM  Customers C 
+FULL OUTER JOIN Orders O 
+ON O.CustomerID=C.CustomerID 
+GROUP BY C.CustomerID
+ORDER BY PercentOfAllOrders DESC
