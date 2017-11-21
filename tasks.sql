@@ -16,3 +16,8 @@ SELECT OD.OrderID, SUM(OD.UnitPrice) AS TotalCount, SUM(OD.Discount)*100 AS Tota
 FROM [Order Details] OD
 GROUP BY OD.OrderId 
 ORDER BY OD.OrderID DESC
+
+--Third task
+-- Create a query to return all customers from USA without Fax:
+--| CustomerId | CompanyName |
+SELECT C.CustomerID, C.CompanyName FROM Customers C WHERE C.Country='USA' AND C.Fax IS NOT NULL
